@@ -1,0 +1,52 @@
+name: "Bug (Frontend)"
+description: "Bug report for frontend. Include browser, device, and reproduction steps."
+title: "Bug: "
+labels: ["bug", "frontend"]
+type: "🔴 Bug"
+
+body:
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment / Browser / Device"
+      description: "Include browser version, OS, screen size, device type, etc."
+      placeholder: |
+        Browser: Chrome 120
+        Device: iPhone 12
+        OS: Windows 10
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      placeholder: |
+        1. Navigate to /dashboard
+        2. Click the 'Refresh' button
+        3. Observe no UI change
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: "Observed behavior"
+      placeholder: "Describe what is currently happening."
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected behavior"
+      placeholder: "Describe what should happen."
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "Screenshots / Console logs / Network traces"
+      description: "Attach screenshots, videos, console errors, or failing network calls."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Debug checklist"
+      options:
+        - label: "Reproducible in incognito / cleared cache"
+        - label: "Cross-browser verified"
+        - label: "Accessibility impact verified"

@@ -1,0 +1,114 @@
+name: "Backend User Story (Python / ML Backend)"
+description: "Modern product-format user story for backend work (Python, REST APIs, ML/LLM-ready). Includes fixed default task checklist."
+title: "User-Story: "
+labels: ["user-story", "backend"]
+type: "🟢 User Story"
+
+body:
+  - type: textarea
+    id: persona
+    attributes:
+      label: "Persona / Role"
+      description: "Who benefits from this story?"
+      placeholder: "As a data analyst / API consumer / system user…"
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Statement"
+      description: "What problem does this story solve?"
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "Motivation / Business value"
+      description: "Why this matters; business KPIs or outcomes impacted."
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria (testable)"
+      description: "Measurable, testable criteria using Gherkin-style if possible."
+      placeholder: |
+        - Given valid input, when API is called, then response is returned within SLA
+        - Invalid payload returns 400 with proper error message
+        - Unauthorized access is rejected
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: "Constraints / Non-functional requirements"
+      description: "Performance, security, scalability, compliance, cost, etc."
+
+  - type: textarea
+    id: api_contract
+    attributes:
+      label: "API contract (if applicable)"
+      description: "HTTP method, endpoint, request/response schema, status codes."
+      placeholder: |
+        POST /api/v1/predict
+        Request:
+          {
+            "input": "..."
+          }
+        Response:
+          {
+            "prediction": "...",
+            "confidence": 0.92
+          }
+        Status Codes:
+          200 OK
+          400 Bad Request
+          401 Unauthorized
+
+  - type: textarea
+    id: model_details
+    attributes:
+      label: "Model / Algorithm details"
+      description: "Model used, source (pretrained/custom), versioning, assumptions."
+      placeholder: |
+        - Model: HuggingFace transformer / custom ML model
+        - Inference-only or fine-tuned
+        - Model version / hash
+
+  - type: textarea
+    id: data_dependencies
+    attributes:
+      label: "Data dependencies"
+      description: "External APIs, datasets, feature stores, secrets, or configs used."
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Implementation notes & links"
+      description: "Links to ADRs, design docs, API specs, model cards, etc."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Default task checklist (python backend)"
+      description: "Fixed checklist — uncheck as work progresses."
+      options:
+        - label: "Define / update API contract (OpenAPI auto-generated)"
+        - label: "Implement API route (FastAPI / Flask)"
+        - label: "Implement service layer / business logic"
+        - label: "Integrate ML/LLM inference logic"
+        - label: "Handle validation and error responses"
+        - label: "Add unit tests (pytest)"
+        - label: "Add integration tests (API-level)"
+        - label: "Validate performance / latency constraints"
+        - label: "Add logging and error handling"
+        - label: "Update API documentation (Swagger auto-docs)"
+        - label: "Update README / developer documentation"
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: "Definition of Done"
+      description: "What must be true before this story is complete?"
+      placeholder: |
+        - Code reviewed and approved
+        - Tests passing
+        - API documented via Swagger/OpenAPI
+        - Merged to main branch
+        - Demo or validation completed

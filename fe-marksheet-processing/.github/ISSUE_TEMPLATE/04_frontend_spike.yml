@@ -1,0 +1,35 @@
+name: "Spike (Frontend)"
+description: "Timeboxed research task for frontend."
+title: "Spike: "
+labels: ["spike", "frontend"]
+type: "🟡 Spike"
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "Research question"
+      description: "What are you trying to evaluate or learn?"
+      placeholder: |
+        Example:
+        Should we use React Suspense for route-level data fetching?
+
+  - type: input
+    id: timebox
+    attributes:
+      label: "Timebox (hours)"
+      description: "Enter numeric hours (GitHub Issue Forms does not support number fields)."
+      placeholder: "4"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: "Expected deliverable"
+      description: "What should be produced by the end of this spike?"
+      placeholder: |
+        Examples:
+        - Demo or PoC
+        - Performance comparison table
+        - Recommendation document

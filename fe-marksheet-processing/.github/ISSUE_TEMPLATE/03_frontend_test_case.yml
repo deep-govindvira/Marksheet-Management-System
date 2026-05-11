@@ -1,0 +1,56 @@
+name: "Frontend Test Case"
+description: "Create a frontend test case (unit/e2e)."
+title: "Test-Case: "
+labels: ["test", "frontend"]
+type: "🟠 Test"
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "What does this test validate? Give context and expected behavior."
+      placeholder: |
+        Example:
+        This test verifies that the login form displays proper validation errors when required fields are empty.
+
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: "Preconditions"
+      description: "Initial state, mock data, environment setup, or URLs needed."
+      placeholder: |
+        Example:
+        - User is logged out
+        - App built in staging environment
+        - Cypress fixtures loaded
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Test steps"
+      description: "Step-by-step flow for executing the test."
+      placeholder: |
+        1. Navigate to /login
+        2. Leave fields empty
+        3. Click 'Submit'
+        4. Observe displayed validation messages
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected result"
+      description: "What should happen if the application behaves correctly?"
+      placeholder: |
+        Example:
+        - Email and password fields show mandatory field errors
+        - Submit request is not sent to the server
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes (browsers, fixtures)"
+      description: "Any additional considerations such as browser versions, mock files, fixtures, and tools."
+      placeholder: |
+        Example:
+        Test must run on Chrome, Firefox, and Safari using Cypress.

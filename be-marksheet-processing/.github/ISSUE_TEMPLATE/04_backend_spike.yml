@@ -1,0 +1,47 @@
+name: "Spike (Backend)"
+description: "Timeboxed research task for backend."
+title: "Spike: "
+labels: ["spike", "backend"]
+type: "🟡 Spike"
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "Research question"
+      description: "What are you trying to evaluate or discover?"
+      placeholder: |
+        Example:
+        - Should we use Redis or in-memory cache for session storage?
+        - Evaluate performance of JWT vs opaque token systems.
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: "Approach / experiments"
+      description: "List experiments or evaluations you will conduct."
+      placeholder: |
+        Example:
+        - Benchmark Redis
+        - Evaluate CPU cost of signing tokens
+        - Compare frameworks
+
+  - type: input
+    id: timebox
+    attributes:
+      label: "Timebox (hours)"
+      description: "Enter the planned duration for the spike (numeric value)."
+      placeholder: "4"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: "Expected deliverable"
+      description: "What should be produced at the end of the spike?"
+      placeholder: |
+        Examples:
+        - PoC demonstrating new approach
+        - Benchmark comparison table
+        - Final recommendation document

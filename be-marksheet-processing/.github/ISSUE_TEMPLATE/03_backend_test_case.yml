@@ -1,0 +1,53 @@
+name: "Backend Test Case"
+description: "Create a backend test case (unit/integration)."
+title: "Test-Case: "
+labels: ["test", "backend"]
+type: "🟠 Test"
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "What does this test verify? Provide context and purpose."
+      placeholder: |
+        Example:
+        This test ensures that expired JWT tokens are rejected by the authorization filter.
+
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: "Preconditions"
+      description: "Initial state, mock setup, database records, or config required."
+      placeholder: |
+        Example:
+        - User exists in database
+        - Token expired 5 minutes ago
+        - Cache empty
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Test steps"
+      description: "Step-by-step procedure to execute the test."
+      placeholder: |
+        1. Generate an expired JWT token
+        2. Call /auth/validate endpoint
+        3. Observe response
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected result"
+      description: "The exact outcome the system must produce."
+      placeholder: |
+        Example:
+        - Status: 401 Unauthorized
+        - Error message: Token expired
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes"
+      description: "Any extra details, test dataset IDs, logs, mocks, or config considerations."
+      placeholder: "Test uses mock JwtProvider with expiration override."

@@ -1,0 +1,87 @@
+name: "Frontend User Story (Next.js / React)"
+description: "Modern product-format user story for frontend work (Next.js / React). Includes fixed default task checklist."
+title: "User-Story: "
+labels: ["user-story", "frontend"]
+type: "🟢 User Story"
+
+body:
+  - type: textarea
+    id: persona
+    attributes:
+      label: "Persona / Role"
+      description: "Who benefits from this story?"
+      placeholder: "As a logged-in user…"
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Statement"
+      description: "What user problem does this story solve?"
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "Motivation / Business value"
+      description: "Why this matters; KPIs / business outcomes."
+
+  - type: textarea
+    id: designs
+    attributes:
+      label: "UI / Figma / Design links"
+      description: "Link to Figma frames, clickable prototypes, screen flows."
+      placeholder: "https://figma.com/file/…"
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria (testable)"
+      description: "Measurable outcomes written in a testable format."
+      placeholder: |
+        - Given..., when..., then...
+        - UI responds within 100ms
+        - Mobile responsive: min width 360px
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: "Constraints / Performance / Accessibility"
+      description: "E.g., WCAG, SSR vs CSR constraints, bundle-size limits."
+      placeholder: |
+        - Must load < 200KB JS on first load
+        - Must meet WCAG AA contrast ratios
+
+  - type: textarea
+    id: api_contract
+    attributes:
+      label: "Backend API contract"
+      description: "List endpoints, inputs/outputs, and example payloads."
+      placeholder: |
+        GET /api/user/:id
+        Response: { id, name, avatarUrl }
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Default task checklist (frontend)"
+      description: "Fixed checklist — uncheck items as they are completed."
+      options:
+        - label: "Review UI designs & confirm flows"
+        - label: "Implement page / route (Next.js page)"
+        - label: "Implement components & styles"
+        - label: "Implement API calls / data fetching (fetch/axios/SWR)"
+        - label: "Implement client-side validation"
+        - label: "Add unit tests (Jest / React Testing Library)"
+        - label: "Add integration/e2e tests (Playwright / Cypress)"
+        - label: "Ensure accessibility (ARIA, keyboard navigation)"
+        - label: "Update documentation / Storybook"
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: "Definition of Done"
+      description: "Checklist items for completion: reviewed, tested, deployed."
+      placeholder: |
+        - Code reviewed
+        - Tests passed
+        - Documentation updated
+        - Demo completed

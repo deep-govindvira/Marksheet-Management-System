@@ -1,0 +1,91 @@
+name: "Backend User Story (Spring Boot)"
+description: "Modern product-format user story for backend work (Spring Boot). Includes fixed default task checklist."
+title: "User-Story: "
+labels: ["user-story", "backend"]
+type: "🟢 User Story"
+
+body:
+  - type: textarea
+    id: persona
+    attributes:
+      label: "Persona / Role"
+      description: "Who benefits from this story?"
+      placeholder: "As a registered user…"
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: "Problem Statement"
+      description: "What problem does this story solve?"
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: "Motivation / Business value"
+      description: "Why this matters; business KPIs impacted."
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: "Acceptance Criteria (testable)"
+      description: "Measurable, testable criteria using Gherkin-style if possible."
+      placeholder: |
+        - Given X, when Y, then Z
+        - Non-admin cannot access admin-only endpoints
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: "Constraints / Non-functional"
+      description: "Performance, security, compliance, backward compatibility, etc."
+
+  - type: textarea
+    id: api_contract
+    attributes:
+      label: "API contract (if applicable)"
+      description: "METHOD, endpoint, schema, status codes, and examples."
+      placeholder: |
+        POST /api/v1/orders
+        Request: {…}
+        Response: {…}
+
+  - type: textarea
+    id: db_changes
+    attributes:
+      label: "DB / Schema changes"
+      description: "Describe tables, columns, indexes, or migrations involved."
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Implementation notes & links"
+      description: "Add links to ADRs, sequence diagrams, API designs, etc."
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Default task checklist (backend)"
+      description: "Fixed checklist — uncheck as work progresses."
+      options:
+        - label: "Update API contract / OpenAPI spec"
+        - label: "Implement Controller / REST endpoint"
+        - label: "Implement Service layer / Business logic"
+        - label: "Implement Repository / DB access (JPA / SQL)"
+        - label: "Add/Update DTOs and validation"
+        - label: "Add unit tests (JUnit / Mockito)"
+        - label: "Add integration tests (Spring Boot Test)"
+        - label: "Add migration scripts (Flyway / Liquibase)"
+        - label: "Update swagger / API docs"
+        - label: "Update README / developer docs"
+
+  - type: textarea
+    id: definition_of_done
+    attributes:
+      label: "Definition of Done"
+      description: "What must be true before this story is complete?"
+      placeholder: |
+        - Code reviewed
+        - Tests pass
+        - Merged to main
+        - Documentation updated
+        - Demo completed

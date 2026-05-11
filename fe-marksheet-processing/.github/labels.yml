@@ -1,0 +1,63 @@
+- name: epic
+  color: "6f42c1"
+  description: "Top-level business initiative"
+
+- name: feature
+  color: "0366d6"
+  description: "Product-level feature under an epic"
+
+- name: user-story
+  color: "28a745"
+  description: "User story for feature implementation"
+
+- name: backend
+  color: "5319e7"
+  description: "Backend-specific work (Spring Boot)"
+
+- name: frontend
+  color: "0e8a16"
+  description: "Frontend-specific work (React/Next.js)"
+
+- name: bug
+  color: "d73a49"
+  description: "Bug report"
+
+- name: test
+  color: "fbca04"
+  description: "Test case or QA work"
+
+- name: spike
+  color: "f9d0c4"
+  description: "Timeboxed research task"
+
+- name: tech-debt
+  color: "b60205"
+  description: "Technical debt or refactoring"
+
+- name: "priority: P0"
+  color: "b60205"
+  description: "Critical priority"
+
+- name: "priority: P1"
+  color: "d93f0b"
+  description: "High priority"
+
+- name: "priority: P2"
+  color: "fbca04"
+  description: "Normal priority"
+
+- name: in-progress
+  color: "1d76db"
+  description: "Currently being worked on"
+
+- name: review
+  color: "bfd4f2"
+  description: "Under code review"
+
+- name: blocked
+  color: "d93f0b"
+  description: "Blocked by another issue"
+
+- name: done
+  color: "0e8a16"
+  description: "Completed work"

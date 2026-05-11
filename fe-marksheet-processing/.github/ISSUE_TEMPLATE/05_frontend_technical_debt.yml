@@ -1,0 +1,32 @@
+name: "Technical Debt (Frontend)"
+description: "Track frontend technical debt and remediation details."
+title: "Tech-Debt: "
+labels: ["tech-debt", "frontend"]
+type: "⚫ Tech Debt"
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Explain the underlying technical problem or legacy implementation."
+      placeholder: |
+        Example:
+        Component uses deprecated lifecycle methods such as componentWillReceiveProps.
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact (UX / performance / security)"
+      description: "Describe how this tech debt affects the system."
+      placeholder: |
+        - Introduces jank in scroll interactions
+        - Causes layout shift
+        - Impacts Lighthouse performance scores
+
+  - type: input
+    id: effort
+    attributes:
+      label: "Estimated effort (person-days)"
+      description: "Enter a numeric estimate (GitHub Issue Forms does not support number inputs)."
+      placeholder: "2"

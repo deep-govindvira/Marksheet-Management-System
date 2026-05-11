@@ -1,0 +1,315 @@
+input_path: "debug_files" # file or folder path
+output_path: "output_files"
+allowed_input_image_extensions: [".png", ".jpg", ".jpeg", ".tiff", ".bmp"]
+dpi: 300
+grayscale: true
+scale: 2
+languages_for_ocr: "eng+dotOCRDData1+DotMatrix_FT_500+5x5_Dots_FT_500+DisplayDots_FT_500+Dotrice_FT_500+LCDDot_FT_500+dotslayer" 
+config_for_ocr: "--oem 3 --psm 6 -c =|~`^}{[]/\\\\\\<>-#.:«»_;,+=@*$%&()! -c classify_bln_numeric_mode=1 -c tessedit_char_whitelist= ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+stop_llm: false
+# model: "gemini-2.5-flash"
+# model: "gemini-3-flash-preview"
+model: "gemma-3-27b-it"
+# model: "gemma3:27b"
+# model: "llama3.1"
+# model: "phi3" # fast but less accurate
+documents:
+  CBSE_MARKSHEET:
+    keywords:
+      - "TOTAL IN WORDS"
+      - "TOTALINWORDS"
+      - "CENTRAL"
+      - "POSITIONAL"
+      - "SENIOR"
+      - "ALL INDIA"
+    prompt: |
+      You are an expert OCR post-processing and document understanding system.
+
+      Task: Convert the given noisy OCR text of a CBSE marksheet into a clean, structured JSON object.
+      
+      Input formate will be similar to:
+      Board Name,
+      Student's Name, Roll No,
+      Mother's Name, 
+      Father's Name,
+      School Name,
+      Subject Code, Subject, Theory, Practical, Total, Total in words, Positional Grade
+      Result,
+      Date
+
+      JSON SCHEMA (DO NOT CHANGE KEYS):
+      {
+        "board": "CBSE",
+        "studentName": "Rahul Sharma",
+        "rollNo": 2212787,
+        "motherName": "Sunita Sharma",
+        "fatherName": "Anil Sharma",
+        "school": "Greenwood High School",
+        "marks": [
+          {
+            "subCode": "101",
+            "subject": "Mathematics",
+            "theory": 80,
+            "practical": null,
+            "total": 80,
+            "totalInWords": "Eighty",
+            "positionalGrade": "A1",
+            "corrected": []
+          },
+          {
+            "subCode": "102",
+            "subject": "Physics",
+            "theory": 75,
+            "practical": 20,
+            "total": 95,
+            "totalInWords": "Ninety Five",
+            "positionalGrade": "A1",
+            "corrected": [
+              {
+                "fieldName": "total",
+                "ocrValue": 90,
+                "correctedValue": 95
+              },
+              {
+                "fieldName": "totalInWords",
+                "ocrValue": "Ninty Five",
+                "correctedValue": "Ninety Five"
+              }
+            ]
+          }
+        ],
+        "result": "Pass",
+        "date": "23-05-2004",
+        "corrected": [
+          {
+            "fieldName": "studentName",
+            "ocrValue": "Rahut Sharma",
+            "correctedValue": "Rahul Sharma"
+          }
+        ]
+      }
+
+
+      Strict rules (must follow all):
+          Set "board" to "CBSE".
+          Correct spelling, formatting, capitalization, and numeric errors to make the data meaningful.
+          Log every correction in corrected as { fieldName, ocrValue, correctedValue }.
+          Subject Code is always 3 digits and dont contain alphabet.
+          Grade can be A1, A2, B1, B2, C1, C2, D1, D2, E.
+          date is always in DD-MM-YYYY format.
+          Remove leading zeros from numbers.
+          "totalInWords" is always correct. Use it to set "total".
+          If "theory" + "practical" does not equal "total", the take "theory" as "total" - "practical".
+          Include all subjects from the OCR text in the JSON output. 
+          Output ONLY valid JSON.
+          No explanations, no markdown, no comments.
+          No trailing commas.
+          Use only double quotes (").
+          Always preserve types: numbers as numbers, strings as strings.
+          JSON should not start with ```json or end with ```.
+
+  GSEB_MARKSHEET:
+    keywords:
+      - "GUJARAT"
+      - "GANDHINAGAR"
+      - "OBTAINED"
+    prompt: |
+      You are an expert OCR post-processing and document understanding system.
+
+      Task: Convert the given noisy OCR text of a GSEB marksheet statement into a clean, structured JSON object.
+      
+      Input formate will be similar to:
+      Board Name,
+      Month and Year of Exam, Seat No, Centre No, School Index No, GroupName,
+      Student's Name,
+      Subject Code, Subject, Total, Obtained, Obtained in words, Grade
+      Total, Obtained, overAllGrade, Date
+      Obtained in words,
+      sciencePercentileRank, Result
+
+      JSON SCHEMA (DO NOT CHANGE KEYS):
+      {
+        "board": "GSEB",
+        "monthAndYearOfExam": "FEB-MAR-25",
+        "seatNo": "B 216772",
+        "centreNo": "0503",
+        "schoolIndexNo": "05.0146",
+        "groupName": "A",
+        "studentName": "Rahul Sharma",
+        "marks": [
+          {
+            "subCode": "101",
+            "subject": "Mathematics",
+            "total": 100,
+            "obtained": 80,
+            "obtainedInWords": "Eighty",
+            "grade": "A1",
+            "corrected": [
+              {
+                "fieldName": "obtainedInWords",
+                "ocrValue": "Eigthy",
+                "correctedValue": "Eighty"
+              }
+            ]
+          },
+          {
+            "subCode": "102",
+            "subject": "Physics",
+            "total": 100,
+            "obtained": 95,
+            "obtainedInWords": "Ninety Five",
+            "grade": "A1",
+            "corrected": [
+              {
+                "fieldName": "obtained",
+                "ocrValue": 90,
+                "correctedValue": 95
+              },
+              {
+                "fieldName": "obtainedInWords",
+                "ocrValue": "Ninty Five",
+                "correctedValue": "Ninety Five"
+              }
+            ]
+          }
+        ],
+        "total": 200,
+        "obtained": 175,
+        "obtainedInWords": "One Hundred Seventy Five",
+        "overAllGrade": "A1",
+        "date": "23-05-2004",
+        "sciencePercentileRank": 95.49,
+        "result": "Pass",
+        "corrected": [
+          {
+            "fieldName": "studentName",
+            "ocrValue": "Rahut Sharma",
+            "correctedValue": "Rahul Sharma"
+          }
+        ]
+      }
+      Strict rules (must follow all):
+          Set "board" to "GSEB".
+          Correct spelling, formatting, capitalization, and numeric errors to make the data meaningful.
+          Log every correction in corrected as { fieldName, ocrValue, correctedValue }.
+          "obtainedInWords" is always correct. Use it to set the "obtained" marks field.
+          The "total" in the root of the JSON should be the sum of all "total" marks from each subject in the "subjects" array.
+          The "obtained" in the root of the JSON should be the sum of all "obtained" marks from each subject in the "subjects" array.
+          "subjectCode" is always 3 digits.
+          SeatNo starts with alphabet then digits.
+          Grade can be A1, A2, B1, B2, C1, C2, D.
+          date is always in DD-MM-YYYY format.
+          Remove leading zeros from numbers.
+          Include all subjects from the OCR text in the JSON output. 
+          Output ONLY valid JSON.
+          No explanations, no markdown, no comments.
+          No trailing commas.
+          Use only double quotes (").
+          Always preserve types: numbers as numbers, strings as strings.
+          JSON should not start with ```json or end with ```.
+
+  ICSE_MARKSHEET:
+    keywords:
+      - "INDIAN CERTIFICATE OF SECONDARY EDUCATION"
+      - "INDIAN SCHOOL CERTIFICATE EXAMINATIONS"
+      - "COUNCIL FOR THE INDIAN SCHOOL CERTIFICATE EXAMINATIONS"
+      - "INDIAN"
+    prompt: |
+      You are an expert OCR post-processing and document understanding system.
+
+      Task: Convert the given noisy OCR text of a ICSE marksheet into a clean, structured JSON object.
+      
+      Input formate will be similar to:
+      Board Name,
+      Student Name,
+      School Name,
+      Unique Id,
+      Mother's Name, 
+      Father's Name,
+      Subject, Percentage Marks, Percentage Marks in words,
+          Sub Subject, Marks,
+          Sub Subject, Marks,
+      Date Of Birth,
+      Result,
+      Date
+
+      JSON SCHEMA (DO NOT CHANGE KEYS):
+      {
+        "board": "ICSE",
+        "studentName": "Rahul Sharma",
+        "school": "St. Mary's High School",
+        "uniqueId": 7756196,
+        "motherName": "Sunita Sharma",
+        "fatherName": "Anil Sharma",
+        "marks": [
+          {
+            "subject": "Mathematics",
+            "percentageMarks": 80,
+            "percentageMarksInWords": "Eighty Percent",
+            "corrected": [
+              {
+                "fieldName": "percentageMarksInWords",
+                "ocrValue": "Eigthy Percent",
+                "correctedValue": "Eighty Percent"
+              }
+            ]
+          },
+          {
+            "subject": "Physics",
+            "percentageMarks": 95,
+            "percentageMarksInWords": "Ninety Five Percent",
+            "corrected": [
+              {
+                "fieldName": "percentageMarksInWords",
+                "ocrValue": "Ninty Five Percent",
+                "correctedValue": "Ninety Five Percent"
+              }
+            ]
+          }
+        ],
+        "dateOfBirth": "15-08-2006",
+        "result": "Pass",
+        "date": "23-05-2004",
+        "corrected": [
+          {
+            "fieldName": "studentName",
+            "ocrValue": "Rahut Sharma",
+            "correctedValue": "Rahul Sharma"
+          }
+        ]
+      }
+      Strict rules (must follow all):
+          Set "board" to "ICSE".
+          ignore sub subject names and marks.
+          for example English is subject. "English Literature", "Literature in English" is sub subject.
+          "History, CIVICS & Geography" is subject. "History & Civics", "Geography" are sub subjects.
+          "Science" is subject. "Physics", "Chemistry", "Biology" are sub subjects.
+          Correct spelling, formatting, capitalization, and numeric errors to make the data meaningful.
+          Log every correction in corrected as { fieldName, ocrValue, correctedValue }.
+          date is always in DD-MM-YYYY format.
+          Remove leading zeros from numbers.
+          Don't include "smt" and "shri" in names.
+          "percentageMarksInWords" is always correct. Use it to set "percentageMarks".
+          Include all subjects from the OCR text in the JSON output. 
+          Output ONLY valid JSON.
+          No explanations, no markdown, no comments.
+          No trailing commas.
+          Use only double quotes (").
+          Always preserve types: numbers as numbers, strings as strings.
+          JSON should not start with ```json or end with ```.
+default:
+  prompt: |
+      You are an expert OCR post-processing and document understanding system.
+
+      Task: Convert the given noisy OCR text into a clean, structured JSON object.
+
+      Strict rules (must follow all):
+          in "corrected" field, write things you have corrected in the JSON output compared to the OCR text.
+          If no corrections were made, write "No corrections made".
+          Correct spelling mistakes.
+          Output ONLY valid JSON.
+          No explanations, no markdown, no comments.
+          No trailing commas.
+          Use only double quotes (").
+          Always preserve types: numbers as numbers, strings as strings.
+          JSON should not start with ```json or end with ```.

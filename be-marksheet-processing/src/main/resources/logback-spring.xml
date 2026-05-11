@@ -1,0 +1,31 @@
+<configuration>
+
+    <property name="LOG_PATH" value="logs"/>
+
+    <appender name="JSON_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <!-- current active log file -->
+        <file>${LOG_PATH}/app-current.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <!-- ✅ Year-Month in filename -->
+            <fileNamePattern>${LOG_PATH}/app-%d{yyyy-MM}.log</fileNamePattern>
+
+            <!-- keep logs for 12 months -->
+            <maxHistory>12</maxHistory>
+
+        </rollingPolicy>
+
+        <!-- JSON logging -->
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <timeZone>Asia/Kolkata</timeZone>
+        </encoder>
+
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="JSON_FILE"/>
+    </root>
+
+</configuration>

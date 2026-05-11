@@ -1,0 +1,60 @@
+name: "Bug (Backend)"
+description: "Bug report for backend (Spring Boot). Fill reproduction steps and expected behavior."
+title: "Bug: "
+labels: ["bug", "backend"]
+type: "🔴 Bug"
+
+body:
+  - type: markdown
+    attributes:
+      value: "**Please include logs, stack traces, and any relevant IDs (request id, correlation id).**"
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: "Environment"
+      description: "Environment details (dev, stage, prod), service name, version."
+      placeholder: "Environment: dev\nService: auth-service\nVersion: 1.4.2"
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to reproduce"
+      placeholder: |
+        1. Call POST /auth/login
+        2. Use invalid credentials
+        3. Observe 500 response
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: "Observed behavior"
+      placeholder: "Describe what actually happened."
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected behavior"
+      placeholder: "Describe what you expected to happen."
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Relevant logs / stack trace"
+      placeholder: "Paste logs or stack traces"
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact / severity"
+      description: "Describe how severe the bug is (P0, P1, P2)"
+      placeholder: "P1 - impacts login flow for 10% of users"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: "Remediation checklist"
+      options:
+        - label: "Reproducible on environment specified"
+        - label: "Root cause analysis completed"
+        - label: "Hotfix / rollback required?"

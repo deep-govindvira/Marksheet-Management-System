@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+
+  mms-frontend:
+    container_name: mms-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_SERVER_URL: ${REACT_APP_SERVER_URL}
+    image: mms-frontend:latest
+    env_file:
+      - .env
+    expose:
+      - "3000"
+    # restart: unless-stopped
+    networks:
+      - mms-network
+
+volumes:
+  postgres_data:
+  s3_data:
+
+networks:
+  mms-network:
+    name: mms-network
+    driver: bridge

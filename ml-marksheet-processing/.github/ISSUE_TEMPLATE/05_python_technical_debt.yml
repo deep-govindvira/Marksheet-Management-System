@@ -1,0 +1,57 @@
+name: "Technical Debt (Backend – Python / ML Backend)"
+description: "Track backend technical debt for Python services with remediation notes and impact."
+title: "Tech-Debt: "
+labels: ["tech-debt", "backend"]
+type: "⚫ Tech Debt"
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description of debt"
+      description: "Explain the underlying technical problem, legacy code, or poor design."
+      placeholder: |
+        Example:
+        The inference service mixes API routing, business logic, and model execution
+        in a single module, making it hard to test and extend.
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: "Impact (performance / maintainability / cost)"
+      description: "Describe how this debt negatively affects the system."
+      placeholder: |
+        Examples:
+        - Increased inference latency
+        - Difficult to add new models or providers
+        - Hard to write unit tests
+        - Higher operational cost or instability
+
+  - type: textarea
+    id: remediation
+    attributes:
+      label: "Suggested remediation"
+      description: "Explain the fix or approach to remove this debt."
+      placeholder: |
+        Example:
+        Separate API layer from inference logic.
+        Introduce a clear service boundary and model adapter pattern.
+        Add proper abstraction for external ML/LLM providers.
+
+  - type: textarea
+    id: ml_considerations
+    attributes:
+      label: "ML / Model considerations (if applicable)"
+      description: "Any model-specific concerns related to this technical debt."
+      placeholder: |
+        Examples:
+        - Model versioning not clearly handled
+        - No abstraction for switching model providers
+        - Inference errors not properly classified
+
+  - type: input
+    id: effort
+    attributes:
+      label: "Estimated effort (person-days)"
+      description: "Enter a numeric estimate. (GitHub Issue Forms do not support numeric inputs.)"
+      placeholder: "2"

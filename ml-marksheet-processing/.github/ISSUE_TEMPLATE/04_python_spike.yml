@@ -1,0 +1,51 @@
+name: "Spike (Backend – Python / ML Backend)"
+description: "Timeboxed research or exploration task for Python backend (REST APIs, ML/LLM-ready)."
+title: "Spike: "
+labels: ["spike", "backend"]
+type: "🟡 Spike"
+
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: "Research question"
+      description: "What are you trying to evaluate or discover?"
+      placeholder: |
+        Examples:
+        - Which FastAPI dependency injection pattern suits our use case?
+        - Evaluate latency and cost of different LLM providers.
+        - Compare in-process vs external model inference.
+        - Should we cache inference results or rely on model speed?
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: "Approach / experiments"
+      description: "List experiments, benchmarks, or evaluations you will conduct."
+      placeholder: |
+        Examples:
+        - Build a small FastAPI PoC endpoint
+        - Benchmark inference latency under load
+        - Compare memory usage of different approaches
+        - Evaluate error handling and retry strategies
+
+  - type: input
+    id: timebox
+    attributes:
+      label: "Timebox (hours)"
+      description: "Enter the planned duration for the spike (numeric value)."
+      placeholder: "4"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: "Expected deliverable"
+      description: "What should be produced at the end of the spike?"
+      placeholder: |
+        Examples:
+        - Proof-of-concept implementation
+        - Benchmark results and comparison table
+        - Architecture or design recommendation
+        - Go / No-Go decision with rationale

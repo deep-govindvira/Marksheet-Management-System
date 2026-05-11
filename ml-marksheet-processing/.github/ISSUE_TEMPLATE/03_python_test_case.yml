@@ -1,0 +1,65 @@
+name: "Backend Test Case (Python)"
+description: "Create a backend test case (unit / integration) for Python REST APIs and ML/LLM services."
+title: "Test-Case: "
+labels: ["test", "backend"]
+type: "🟠 Test"
+
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "What does this test verify? Provide context and purpose."
+      placeholder: |
+        Example:
+        This test verifies that invalid input payloads are rejected by the API validation layer.
+
+  - type: textarea
+    id: preconditions
+    attributes:
+      label: "Preconditions"
+      description: "Initial state, fixtures, mocks, environment variables, or config required."
+      placeholder: |
+        Example:
+        - Test database initialized
+        - Required environment variables set
+        - Model loaded or mocked
+        - External API calls stubbed
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Test steps"
+      description: "Step-by-step procedure to execute the test."
+      placeholder: |
+        1. Prepare request payload
+        2. Call POST /api/v1/predict
+        3. Capture response
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected result"
+      description: "The exact outcome the system must produce."
+      placeholder: |
+        Example:
+        - Status: 400 Bad Request
+        - Error message indicates invalid input
+        - No inference executed
+
+  - type: textarea
+    id: test_type
+    attributes:
+      label: "Test type"
+      description: "Specify the kind of test being created."
+      placeholder: |
+        Unit / Integration / API / Performance / Model validation
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notes"
+      description: "Extra details: fixtures, mocks, datasets, logs, or configuration considerations."
+      placeholder: |
+        Example:
+        Test uses pytest fixtures and mocks external LLM calls to avoid network dependency.

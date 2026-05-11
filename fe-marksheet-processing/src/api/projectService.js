@@ -1,0 +1,47 @@
+import axiosInstance from "./axiosInstance";
+
+export const createProject = async (projectData) => {
+  const response = await axiosInstance.post(`/projects`, projectData);
+  return response.data;
+};
+
+export const getProjects = async () => {
+  const response = await axiosInstance.get(`/projects`);
+  return response.data;
+};
+
+export const getProjectsForVerifier = async () => {
+  const response = await axiosInstance.get(`/verifier/projects`);
+  return response.data;
+};
+
+export const getProjectById = async (projectId) => {
+  const response = await axiosInstance.get(`/projects/${projectId}`);
+  return response.data;
+};
+
+export const getProjectByIdForVerifier = async (projectId) => {
+  const response = await axiosInstance.get(`/verifier/projects/${projectId}`);
+  return response.data;
+};
+
+export const addUserToProject = async (projectId, request) => {
+  const response = await axiosInstance.put(`/projects/${projectId}/addUser`, request);
+  return response.data;
+};
+
+export const removeUserToProject = async (projectId, email) => {
+  const response = await axiosInstance.put(`/projects/${projectId}/removeUser`, { email });
+  return response.data;
+};
+
+export const updateProject = async (projectId, data) => {
+  const response = await axiosInstance.put(`/projects/${projectId}`, data);
+  return response.data;
+};
+
+export const stopProcessing = async (projectId) => {
+  const response = await axiosInstance.post(`/projects/${projectId}/marksheets/stopProcessing`,);
+  return response.data;
+};
+

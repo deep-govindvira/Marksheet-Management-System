@@ -1,0 +1,45 @@
+name: Validate PR References a User Story
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title & body for story reference
+        id: check
+        run: |
+          set -e
+
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          PR_BODY="${{ github.event.pull_request.body || '' }}"
+
+          # Pattern matchers:
+          #  - Issue reference: #123
+          #  - US- numeric pattern: US-123 or us-123
+          #  - Explicit keywords: "User Story:" or "User-story:" or "user story"
+          #  - "Fixes #123" handled via issue reference
+          if echo "$PR_TITLE" | grep -Eq "#[0-9]+" || echo "$PR_BODY" | grep -Eq "#[0-9]+" ; then
+            echo "Found issue reference in title/body."
+            exit 0
+          fi
+
+          if echo "$PR_TITLE" | grep -Eiq "US-[0-9]+" || echo "$PR_BODY" | grep -Eiq "US-[0-9]+" ; then
+            echo "Found US-<id> in title/body."
+            exit 0
+          fi
+
+          if echo "$PR_BODY" | grep -Eiq "User[ _-]?Story[: ]" ; then
+            echo "Found explicit 'User Story' mention in body."
+            exit 0
+          fi
+
+          echo "::error::Pull request must reference a User Story or issue (e.g. 'Fixes #123' or 'US-101')."
+          echo "Examples accepted: 'Fixes #123', 'US-101', or include 'User Story: <repo>#<issue-number>' in the PR body."
+          exit 1

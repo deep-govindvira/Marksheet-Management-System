@@ -1,0 +1,60 @@
+name: Branch Name Validator
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine branch name
+        id: get_branch
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "branch=${{ github.head_ref }}" >> $GITHUB_OUTPUT
+          else
+            REF="${{ github.ref }}"
+            echo "branch=${REF#refs/heads/}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate branch name
+        run: |
+          BRANCH="${{ steps.get_branch.outputs.branch }}"
+          echo "Branch name: $BRANCH"
+
+          # ---------------------------------------------------
+          # 1. Allow system branches with NO validation
+          # ---------------------------------------------------
+          if echo "$BRANCH" | grep -Eiq '^(main|master|dev|develop|stage|staging|qa|prod|production)$'; then
+            echo "System branch '$BRANCH' - validation skipped."
+            exit 0
+          fi
+
+          # Release/hotfix branches also allowed
+          if echo "$BRANCH" | grep -Eiq '^(release\/|hotfix\/)'; then
+            echo "Release/Hotfix branch '$BRANCH' - validation skipped."
+            exit 0
+          fi
+
+          # ---------------------------------------------------
+          # 2. Validate feature branches
+          # Pattern: <area>/<type>-<id>-<short-description>
+          # ---------------------------------------------------
+          REGEX='^(backend|frontend|goals)\/(us|bug|spike|tech|feature)-[0-9]+-[a-z0-9-]+$'
+
+          if echo "$BRANCH" | grep -Eiq "$REGEX"; then
+            echo "Branch name matches required pattern."
+            exit 0
+          fi
+
+          echo "::error::Branch name '$BRANCH' does not match required pattern."
+          echo "::error::Allowed formats:"
+          echo "  - main, dev, stage, qa, production"
+          echo "  - release/*, hotfix/*"
+          echo "  - backend/us-101-add-login"
+          echo "  - frontend/bug-55-fix-button"
+          exit 1

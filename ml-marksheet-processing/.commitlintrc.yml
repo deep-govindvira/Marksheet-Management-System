@@ -1,0 +1,6 @@
+extends:
+  - conventional
+rules:
+  header-max-length: [2, "always", 120]
+  # require an issue id in the footer? optional rule:
+  # footer-leading-blank: [1, "always"]

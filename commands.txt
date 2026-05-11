@@ -1,0 +1,233 @@
+brew install putty
+puttygen marksheet-server.ppk -O private-openssh -o marksheet-server.pem
+chmod 400 marksheet-server.pem
+ssh -i marksheet-server.pem ubuntu@16.170.241.241
+
+scp -i marksheet-server.pem mms.zip ubuntu@16.170.241.241
+scp -i marksheet-server.pem mms.zip ubuntu@16.170.241.241:/home/ubuntu/
+
+Why this matters:
+
+If connection drops, it resumes
+You don't restart 4–30 hours of upload
+
+rsync -avz --progress \
+-e "ssh -i marksheet-server.pem" \
+mms.zip ubuntu@51.20.32.84:/home/ubuntu/
+
+
+unzip mms.zip
+rm mms.zip
+rm -rf fe-marksheet-processing
+sudo apt install unzip -y
+
+curl ifconfig.me
+ipconfig getifaddr en0
+curl -4 ifconfig.me
+
+docker ps
+// running containers
+docker ps -a 
+docker image ls
+docker network ls
+docker rm -f c3e86581db48
+docker rmi -f mms-frontend:latest
+docker start d32c9dbeddc3
+
+docker system prune
+docker system prune -a
+docker volume rm -f $(docker volume ls -q)
+
+
+cat .env
+
+    networks:
+      - mms-network
+
+
+networks:
+  mms-network:
+    name: mms-
+    
+
+
+ping mms.arvrserver.co.in
+ping mmsbe.arvrserver.co.in
+ping mmsml.arvrserver.co.in
+sudo apt update
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d mms.arvrserver.co.in
+
+
+
+
+
+
+nano docker-compose.yaml
+
+cat /etc/hosts                                                                                                                                                                1 ↵
+sudo nano /etc/hosts
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+
+for local
+brew install mkcert
+brew install nss
+mkcert -install
+
+
+very important 
+
+  client_max_body_size 200M;
+
+
+
+🚀 How to generate ONE certificate for all 3 domains
+
+sudo certbot certonly --standalone \
+-d mms.arvrserver.co.in \
+-d mmsbe.arvrserver.co.in \
+-d mmsml.arvrserver.co.in
+
+sudo fallocate -l 4G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+
+
+sudo systemctl disable nginx
+
+
+sudo systemctl stop nginx
+sudo systemctl disable nginx
+sudo apt remove nginx nginx-common nginx-core -y
+sudo pkill nginx
+
+
+docker rm -f mms-ml:latest 
+docker rmi -f mms-ml:latest
+
+scp -i marksheet-server.pem api.py ubuntu@16.170.241.241:/home/ubuntu/
+
+-------------------
+
+mkdir mms
+cd mms
+mkcert mms.arvrserver.co.in mmsbe.arvrserver.co.in mmsml.arvrserver.co.in
+mkdir certs
+mv mms.arvrserver.co.in+2.pem certs
+mv mms.arvrserver.co.in+2-key.pem certs
+
+mkdir be-marksheet-processing
+
+cp  -r \
+../../deep/mms/be-marksheet-processing/.env \
+../../deep/mms/be-marksheet-processing/Dockerfile \
+be-marksheet-processing/
+
+mkdir be-marksheet-processing/target
+
+cp  -r \
+../../deep/mms/be-marksheet-processing/target/backend-0.0.1-SNAPSHOT.jar \
+be-marksheet-processing/target/
+
+
+mkdir fe-marksheet-processing
+
+cp -r \
+../../deep/mms/fe-marksheet-processing/.env \
+../../deep/mms/fe-marksheet-processing/Dockerfile \
+../../deep/mms/fe-marksheet-processing/src \
+../../deep/mms/fe-marksheet-processing/public \
+../../deep/mms/fe-marksheet-processing/nginx.conf \
+../../deep/mms/fe-marksheet-processing/tailwind.config.js \
+../../deep/mms/fe-marksheet-processing/package-lock.json \
+../../deep/mms/fe-marksheet-processing/package.json \
+fe-marksheet-processing/
+
+mkdir ml-marksheet-processing
+
+cp -r \
+../../deep/mms/ml-marksheet-processing/.env \
+../../deep/mms/ml-marksheet-processing/Dockerfile \
+../../deep/mms/ml-marksheet-processing/api.py \
+../../deep/mms/ml-marksheet-processing/traineddata \
+../../deep/mms/ml-marksheet-processing/config.yaml \
+../../deep/mms/ml-marksheet-processing/requirements.txt \
+ml-marksheet-processing/
+
+cp \
+../../deep/mms/docker-compose.yaml \
+../../deep/mms/nginx.conf \
+.
+
+docker compose up -d
+
+
+
+zip mms/be-marksheet-processing.zip ../deep/mms/be-marksheet-processing/target/backend-0.0.1-SNAPSHOT.jar ../deep/mms/be-marksheet-processing/
+
+
+docker compose up -d
+
+
+
+
+
+------------------------
+
+mkdir mms
+cd mms
+git clone https://github.com/Industrial-Projects-2025-2026/fe-marksheet-processing
+git clone https://github.com/Industrial-Projects-2025-2026/be-marksheet-processing
+git clone https://github.com/Industrial-Projects-2025-2026/ml-marksheet-processing
+docker-compose.yaml
+nginx.conf
+ssh -i marksheet-server.pem ubuntu@16.170.241.241
+
+cd be-marksheet-processing
+./mvnw clean package
+cd ..
+
+mkdir mms
+cd mms
+mkdir be-marksheet-processing
+cd be-marksheet-processing
+cd target
+scp -i marksheet-server.pem .zip ubuntu@16.170.241.241:/home/ubuntu/
+cd ..
+
+
+ssh -i marksheet-server.pem ubuntu@16.170.241.241
+
+sudo certbot certonly --standalone \
+-d mms.arvrserver.co.in \
+-d mmsbe.arvrserver.co.in \
+-d mmsml.arvrserver.co.in
+
+docker compose up -d
+
+
+
+
+
+    placeholder-replacement: true
+    placeholders:
+      superadmin_email: ${SUPERADMIN_EMAIL}
+      superadmin_name: ${SUPERADMIN_NAME}
+      superadmin_password: ${SUPERADMIN_PASSWORD}
+      superadmin_role: ${SUPERADMIN_ROLE}
+
+
+superadmin_email: superadmin@gmail.com
+superadmin_name: Super Admin
+superadmin_password: superadmin
+superadmin_role: SUPER_ADMIN
+
+    private String superadminEmail;
+    private String superadminName;
+    private String superadminPassword;
+    private String superadminRole;
+
+
+mkdir -p be-marksheet-processing/target && cp -r ../../deep/mms/be-marksheet-processing/.env ../../deep/mms/be-marksheet-processing/Dockerfile be-marksheet-processing/ && cp -r ../../deep/mms/be-marksheet-processing/target/backend-0.0.1-SNAPSHOT.jar be-marksheet-processing/target/
